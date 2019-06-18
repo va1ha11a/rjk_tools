@@ -17,3 +17,24 @@ def fib(n):
     else:
         return fib(n-1) + fib(n-2)	
 ```
+
+
+
+### Example of results:
+```python
+>>>fib(8)
+>>>21
+```
+#### Without the decorator the following functioncalls would be made:
+fib(8),fib(7),fib(6),fib(5),fib(4),fib(3),fib(2),fib(1),fib(0),fib(1),fib(2),fib(1),fib(0),fib(3),fib(2),fib(1),fib(0),fib(1),fib(4),fib(3),fib(2),fib(1),fib(0),fib(1),fib(2),fib(1),fib(0),fib(5),fib(4),fib(3),fib(2),fib(1),fib(0),fib(1),fib(2),fib(1),fib(0),fib(3),fib(2),fib(1),fib(0),fib(1),fib(6),fib(5),fib(4),fib(3),fib(2),fib(1),fib(0),fib(1),fib(2),fib(1),fib(0),fib(3),fib(2),fib(1),fib(0),fib(1),fib(4),fib(3),fib(2),fib(1),fib(0),fib(1),fib(2),fib(1),fib(0)
+
+#### With the decorator it is reduced to:
+fib(8),fib(7),fib(6),fib(5),fib(4),fib(3),fib(2),fib(1),fib(0)
+
+#### Subsequent runs only run previously unrun calls.
+```python
+>>>fib(9)
+>>>34
+```
+Subsequent runs only run previously unrun calls.
+The above only will runf fib(9)
