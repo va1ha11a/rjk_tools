@@ -1,3 +1,13 @@
 {
-    "python.pythonPath": "C:\\Users\\valhalla\\.virtualenvs\\rjk_tools-B3Rs3Bh1\\Scripts\\python.exe"
+    "python.pythonPath": "C:\\Users\\valhalla\\.virtualenvs\\rjk_tools-B3Rs3Bh1\\Scripts\\python.exe",
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./tests",
+        "-p",
+        "*_test.py"
+    ],
+    "python.testing.pyTestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.unittestEnabled": true
 }
