@@ -6,6 +6,8 @@ Misc tools to help with programming more efficently
 ## decorators
 ### Example of the dynamic_programming usage on a fibonachi function
 ```python
+from rjk_tools.decorators import dynamic_programming
+
 @dynamic_programming
 def fib(n):
     if n == 0:
