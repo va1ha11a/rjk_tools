@@ -36,5 +36,5 @@ fib(8),fib(7),fib(6),fib(5),fib(4),fib(3),fib(2),fib(1),fib(0)
 >>>fib(9)
 >>>34
 ```
-Subsequent runs only run previously unrun calls.
-The above only will runf fib(9)
+#### The above only will run:
+fib(9)
