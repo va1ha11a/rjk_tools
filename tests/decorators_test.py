@@ -22,8 +22,8 @@ class test_dynamic_programming(unittest.TestCase):
 
         # Set up dummy function for various tests.
         @dynamic_programming
-        def dummy(parm1):
-            return parm1
+        def dummy(param1):
+            return param1
 
         self.dummy = dummy
 
@@ -57,5 +57,12 @@ class test_dynamic_programming(unittest.TestCase):
                 self.dummy(param)
             except:
                 self.fail(
-                    f"Param failed to index. Type: {type(param)}, Value: {param}"
+                    f"args failed to index. Type: {type(param)}, Value: {param}"
+                )
+        for param in params:
+            try:
+                self.dummy(param1=param)
+            except:
+                self.fail(
+                    f"kwargs failed to index. Type: {type(param)}, Value: {param}"
                 )

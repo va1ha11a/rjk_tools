@@ -13,8 +13,8 @@ def dynamic_programming(func):
     _store = {}
 
     def inner(*args, **kwargs):
-        key = (args, tuple(sorted(kwargs)),
-               tuple([kwargs[k] for k in sorted(kwargs)]))
+        key = (str(args), str(sorted(kwargs)),
+               str([kwargs[k] for k in sorted(kwargs)]))
         prev = _store.get(key)
         if prev != None:
             # 'returning from cache'
