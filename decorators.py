@@ -9,7 +9,7 @@ def __string_args_key_gen(*args, **kwargs):
     return key
 
 
-def dynamic_programming(func, key_func=__string_args_key_gen):
+def dynamic_programming(func):
     """
     Decorator function that should be able to wrap many functions to make them
     dynamic programming / memoisation.
@@ -22,6 +22,7 @@ def dynamic_programming(func, key_func=__string_args_key_gen):
 
     # TODO: Add other backends such as flatfile or db as options
     _store = {}
+    key_func = __string_args_key_gen
 
     def inner(*args, **kwargs):
         key = key_func(args, kwargs)
