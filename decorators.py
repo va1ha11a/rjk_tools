@@ -1,4 +1,15 @@
-def dynamic_programming(func):
+def __string_args_key_gen(*args, **kwargs):
+    """
+    Key gen function for dynamic programming.
+    Will create a string from args. Some issues might be seen with
+    deep data types if order is not consistant.
+    """
+    key = (str(args), str(sorted(kwargs)),
+           str([kwargs[k] for k in sorted(kwargs)]))
+    return key
+
+
+def dynamic_programming(func, key_func=__string_args_key_gen):
     """
     Decorator function that should be able to wrap many functions to make them
     dynamic programming / memoisation.
@@ -13,8 +24,7 @@ def dynamic_programming(func):
     _store = {}
 
     def inner(*args, **kwargs):
-        key = (str(args), str(sorted(kwargs)),
-               str([kwargs[k] for k in sorted(kwargs)]))
+        key = key_func(args, kwargs)
         prev = _store.get(key)
         if prev != None:
             # 'returning from cache'
