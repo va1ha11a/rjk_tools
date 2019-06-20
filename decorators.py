@@ -1,3 +1,6 @@
+from functools import wraps
+
+
 def __string_args_key_gen(*args, **kwargs):
     """
     Key gen function for dynamic programming.
@@ -9,7 +12,7 @@ def __string_args_key_gen(*args, **kwargs):
     return key
 
 
-def dynamic_programming(func):
+def dynamic_programming(*args, **kwargs):
     """
     Decorator function that should be able to wrap many functions to make them
     dynamic programming / memoisation.
@@ -21,19 +24,28 @@ def dynamic_programming(func):
     # as the closure containse the _store and I have checked a simple example.
 
     # TODO: Add other backends such as flatfile or db as options
-    _store = {}
-    key_func = __string_args_key_gen
+    func = None
+    if len(args) == 1 and callable(args[0]):
+        func = args[0]
 
-    def inner(*args, **kwargs):
-        key = key_func(args, kwargs)
-        prev = _store.get(key)
-        if prev != None:
-            # 'returning from cache'
-            return prev
-        else:
-            # 'new calculation'
-            ret = func(*args, **kwargs)
-            _store[key] = ret
-            return ret
+    key_func = kwargs.get('key_func', __string_args_key_gen)
+    
+    def outer(func):
+        _store = {}
 
-    return inner
+        @wraps(func)
+        def inner(*args, **kwargs):
+            key = key_func(args, kwargs)
+            prev = _store.get(key)
+            if prev != None:
+                # 'returning from cache'
+                return prev
+            else:
+                # 'new calculation'
+                ret = func(*args, **kwargs)
+                _store[key] = ret
+                return ret
+
+        return inner
+
+    return outer(func) if func else outer

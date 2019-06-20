@@ -1,5 +1,6 @@
 import unittest
 from decorators import dynamic_programming
+from decorators import __string_args_key_gen as string_key
 
 
 class test_dynamic_programming(unittest.TestCase):
@@ -66,3 +67,31 @@ class test_dynamic_programming(unittest.TestCase):
                 self.fail(
                     f"kwargs failed to index. Type: {type(param)}, Value: {param}"
                 )
+
+    def test_optional_params(self):
+        @dynamic_programming
+        def test_no_param():
+            pass
+
+        test_no_param()
+
+        @dynamic_programming()
+        def test_called_no_param():
+            pass
+
+        test_called_no_param()
+
+        @dynamic_programming(key_func=string_key)
+        def test_default_param():
+            pass
+
+        test_default_param()
+
+        def alt_key(*args, **kwargs):
+            return hash(f'{args}, {kwargs}')
+
+        @dynamic_programming(key_func=alt_key)
+        def test_alt_param():
+            pass
+
+        test_alt_param()
